@@ -1,0 +1,87 @@
+@model BookFormModel
+
+<div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+<section class="panel mb-4">
+    <div class="section-heading"><h2>Сведения о книге</h2></div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Title" class="form-label">Название *</label>
+            <input asp-for="Title" class="form-control" maxlength="200" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Author" class="form-label">Автор *</label>
+            <input asp-for="Author" class="form-control" maxlength="200" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="PublishedYear" class="form-label">Год издания</label>
+            <input asp-for="PublishedYear" type="number" min="1450" max="2100" class="form-control" />
+            <span asp-validation-for="PublishedYear" class="text-danger"></span>
+        </div>
+        <div class="col-md-9">
+            <label asp-for="Isbn" class="form-label">ISBN</label>
+            <input asp-for="Isbn" class="form-control" maxlength="20" />
+            <span asp-validation-for="Isbn" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Description" class="form-label">Описание</label>
+            <textarea asp-for="Description" class="form-control" rows="3" maxlength="2000"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+</section>
+
+<section class="panel mb-4">
+    <div class="section-heading">
+        <div>
+            <h2>Оглавление</h2>
+        </div>
+        <button type="button" class="btn btn-outline-primary" id="add-chapter">+ Глава</button>
+    </div>
+
+    <div id="chapters">
+        @for (var i = 0; i < Model.Chapters.Count; i++)
+        {
+            <div class="chapter-card" data-chapter>
+                <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+                    <span class="chapter-label">Глава @(i + 1)</span>
+                    <button type="button" class="btn btn-sm btn-link text-danger" data-remove-chapter>Удалить главу</button>
+                </div>
+                <label class="form-label">Название главы *</label>
+                <input name="Chapters[@i].Title" class="form-control mb-3 chapter-title"
+                       value="@Model.Chapters[i].Title" maxlength="200" required data-msg-required="Укажите название главы." />
+                <label class="form-label">Текст главы</label>
+                <input type="hidden" name="Chapters[@i].BodyHtml" class="chapter-html"
+                       value="@Model.Chapters[i].BodyHtml" />
+                <div class="chapter-editor"></div>
+            </div>
+        }
+    </div>
+
+    <template id="chapter-template">
+        <div class="chapter-card" data-chapter>
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+                <span class="chapter-label">Новая глава</span>
+                <button type="button" class="btn btn-sm btn-link text-danger" data-remove-chapter>Удалить главу</button>
+            </div>
+            <label class="form-label">Название главы *</label>
+            <input name="Chapters[__index__].Title" class="form-control mb-3 chapter-title" maxlength="200" required data-msg-required="Укажите название главы." />
+            <label class="form-label">Текст главы</label>
+            <input type="hidden" name="Chapters[__index__].BodyHtml" class="chapter-html" />
+            <div class="chapter-editor"></div>
+        </div>
+    </template>
+
+    <div class="import-box">
+        <label asp-for="ContentsFile" class="form-label fw-semibold">Или загрузить готовое оглавление (.xml)</label>
+        <input asp-for="ContentsFile" type="file" accept=".xml,application/xml,text/xml" class="form-control" />
+        <div class="form-text">Если файл выбран, его главы заменят главы из редактора при сохранении. Максимум 1 МБ.</div>
+    </div>
+</section>
+
+<div class="d-flex gap-2 justify-content-end">
+    <a asp-action="Index" class="btn btn-light">Отмена</a>
+    <button type="submit" class="btn btn-primary px-4">Сохранить книгу</button>
+</div>

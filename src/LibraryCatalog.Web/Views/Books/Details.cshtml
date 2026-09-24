@@ -1,0 +1,58 @@
+@model BookDetailsViewModel
+@{
+    ViewData["Title"] = Model.Book.Title;
+}
+
+<div class="mb-4"><a asp-action="Index" class="back-link">← К списку книг</a></div>
+
+<div class="page-heading align-items-start">
+    <div>
+        <h1>@Model.Book.Title</h1>
+        <p class="book-author mb-0">@Model.Book.Author</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-outline-primary" asp-action="DownloadContents" asp-route-id="@Model.Book.Id">Скачать XML</a>
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Book.Id">Редактировать</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <section class="panel">
+            <div class="section-heading">
+                <h2>Оглавление</h2>
+                <span class="chapter-count">@RussianText.ChapterCount(Model.Chapters.Count)</span>
+            </div>
+            @for (var i = 0; i < Model.Chapters.Count; i++)
+            {
+                var chapter = Model.Chapters[i];
+                <article class="chapter-readonly">
+                    <div class="chapter-number">@(i + 1)</div>
+                    <div>
+                        <h3>@chapter.Title</h3>
+                        <div class="chapter-body">@Html.Raw(chapter.BodyHtml)</div>
+                    </div>
+                </article>
+            }
+        </section>
+    </div>
+    <div class="col-lg-4">
+        <aside class="panel book-facts">
+            <h2>О книге</h2>
+            <dl>
+                <dt>Год издания</dt>
+                <dd>@(Model.Book.PublishedYear?.ToString() ?? "Не указан")</dd>
+                <dt>ISBN</dt>
+                <dd>@(Model.Book.Isbn ?? "Не указан")</dd>
+                <dt>Описание</dt>
+                <dd>@(Model.Book.Description ?? "Нет описания")</dd>
+                <dt>Создана (UTC)</dt>
+                <dd>@Model.Book.CreatedAtUtc.ToString("dd.MM.yyyy HH:mm")</dd>
+            </dl>
+            <form asp-action="Delete" asp-route-id="@Model.Book.Id" method="post"
+                  onsubmit="return confirm('Удалить книгу без возможности восстановления?')">
+                <button type="submit" class="btn btn-outline-danger w-100">Удалить книгу</button>
+            </form>
+        </aside>
+    </div>
+</div>

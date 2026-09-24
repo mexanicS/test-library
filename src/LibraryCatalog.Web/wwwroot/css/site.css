@@ -1,0 +1,76 @@
+:root {
+  --ink: #172334;
+  --muted: #637084;
+  --line: #e2e8f0;
+  --accent: #1763bf;
+  --surface: #ffffff;
+  --canvas: #f6f8fb;
+}
+
+html { min-height: 100%; }
+body { min-height: 100vh; display: flex; flex-direction: column; color: var(--ink); background: var(--canvas); }
+main { flex: 1; }
+a { color: var(--accent); }
+h1, h2, h3 { letter-spacing: -.025em; }
+h1 { font-weight: 750; font-size: clamp(2rem, 4vw, 2.8rem); }
+
+.site-header { background: #fff; border-bottom: 1px solid var(--line); }
+.site-header a { text-decoration: none; }
+.brand { color: var(--ink); font-weight: 750; font-size: 1.15rem; white-space: nowrap; }
+.brand:hover { color: var(--accent); }
+.site-header nav a { color: #475569; font-weight: 550; }
+.site-header nav a:hover { color: var(--accent); }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); background: #fff; font-size: .875rem; }
+
+.page-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.page-heading h1 { margin: 0 0 .35rem; }
+.eyebrow { margin-bottom: .45rem; color: var(--accent); font-size: .78rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 800; }
+.back-link { text-decoration: none; font-weight: 600; }
+.search-bar { display: flex; gap: .65rem; max-width: 660px; }
+.search-bar input { min-width: 0; }
+
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.book-card, .panel, .empty-state { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 6px 20px rgba(23, 35, 52, .035); }
+.book-card { position: relative; display: flex; flex-direction: column; padding: 1.45rem; min-height: 225px; transition: transform .15s, box-shadow .15s; }
+.book-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(23, 35, 52, .09); }
+.book-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.4rem; }
+.book-mark { width: 42px; height: 42px; display: grid; place-items: center; background: #eaf2ff; color: var(--accent); border-radius: 12px; font-size: 1.25rem; font-weight: 800; }
+.chapter-count { display: inline-block; border-radius: 999px; padding: .32rem .7rem; background: #eef4fb; color: #45627f; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+.book-card h2 { font-size: 1.2rem; font-weight: 750; margin-bottom: .3rem; }
+.book-card h2 a { text-decoration: none; color: var(--ink); }
+.book-author { color: var(--muted); margin-bottom: 1.25rem; }
+.book-meta { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin-top: auto; color: var(--muted); font-size: .82rem; }
+.empty-state { text-align: center; padding: 4rem 1.5rem; }
+.empty-state h2 { font-size: 1.35rem; }
+.empty-state p { color: var(--muted); }
+.empty-icon { font-size: 2.5rem; margin-bottom: .8rem; }
+
+.panel { padding: 1.5rem; }
+.panel h2 { font-size: 1.25rem; font-weight: 750; margin: 0; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+.chapter-readonly { display: flex; gap: 1rem; border-top: 1px solid var(--line); padding: 1.35rem 0; }
+.chapter-readonly:last-child { padding-bottom: 0; }
+.chapter-number { flex: 0 0 32px; height: 32px; display: grid; place-items: center; border-radius: 9px; background: #eaf2ff; color: var(--accent); font-weight: 800; }
+.chapter-readonly h3 { font-size: 1.05rem; font-weight: 700; margin: .2rem 0 .5rem; }
+.chapter-body { color: #475569; overflow-wrap: anywhere; }
+.chapter-body > :last-child { margin-bottom: 0; }
+.book-facts dl { margin: 1.2rem 0; }
+.book-facts dt { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 1rem; }
+.book-facts dd { margin: .15rem 0 0; overflow-wrap: anywhere; }
+
+.chapter-card { padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--line); background: #fbfcfe; border-radius: 14px; }
+.chapter-label { font-weight: 750; }
+.chapter-editor { min-height: 110px; background: #fff; }
+.chapter-card .ql-toolbar { border-radius: 8px 8px 0 0; background: #fff; border-color: #ced4da; }
+.chapter-card .ql-container { border-radius: 0 0 8px 8px; border-color: #ced4da; font-size: 1rem; }
+.chapter-card .ql-editor { min-height: 110px; }
+.import-box { padding: 1.1rem; border: 1px dashed #a9bfda; border-radius: 12px; background: #f6faff; }
+.form-control:focus { border-color: #8db6e8; box-shadow: 0 0 0 .2rem rgba(23, 99, 191, .12); }
+
+@media (max-width: 600px) {
+  .site-header .container { align-items: start !important; flex-direction: column; }
+  .site-header nav { flex-wrap: wrap; }
+  .search-bar { flex-wrap: wrap; }
+  .search-bar input { flex-basis: 100%; }
+  .panel { padding: 1.15rem; }
+}

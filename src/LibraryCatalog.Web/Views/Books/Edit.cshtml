@@ -1,0 +1,18 @@
+@model BookFormModel
+@{
+    ViewData["Title"] = "Редактирование книги";
+}
+
+<div class="mb-4"><a asp-action="Details" asp-route-id="@Model.Id" class="back-link">← К карточке книги</a></div>
+<div class="page-heading"><h1>Редактирование книги</h1></div>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" id="book-form">
+    <input type="hidden" asp-for="Id" />
+    <partial name="_BookForm" model="Model" />
+</form>
+
+@section Scripts {
+    <script src="~/vendor/quill/quill.js"></script>
+    <script src="~/js/book-editor.js" asp-append-version="true"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,45 @@
+@model ChapterSearchViewModel
+@{
+    ViewData["Title"] = "Поиск по оглавлению";
+}
+
+<div class="mb-4"><a asp-action="Index" class="back-link">← К списку книг</a></div>
+<div class="page-heading">
+    <div>
+        <h1>Поиск по оглавлению</h1>
+    </div>
+</div>
+
+<form method="get" asp-action="Chapters" class="search-bar mb-4">
+    <label for="search" class="visually-hidden">Название главы</label>
+    <input id="search" name="search" class="form-control" value="@Model.Search" placeholder="Например, Введение" maxlength="200" required />
+    <button type="submit" class="btn btn-primary">Найти</button>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.Search))
+{
+    if (Model.Results.Count == 0)
+    {
+        <div class="empty-state"><h2>Совпадений нет</h2><p>Попробуйте другое название главы.</p></div>
+    }
+    else
+    {
+        <div class="panel">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead><tr><th>Книга</th><th>№ главы</th><th>Название главы</th></tr></thead>
+                    <tbody>
+                        @foreach (var item in Model.Results)
+                        {
+                            <tr>
+                                <td><a asp-action="Details" asp-route-id="@item.BookId">@item.BookTitle</a></td>
+                                <td>@item.ChapterNumber</td>
+                                <td>@item.ChapterTitle</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}

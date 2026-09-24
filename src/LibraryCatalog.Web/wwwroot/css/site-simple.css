@@ -1,0 +1,80 @@
+:root {
+  --ink: #25303b;
+  --muted: #66717b;
+  --line: #dce1e6;
+  --accent: #245d8c;
+}
+
+html { min-height: 100%; }
+body { min-height: 100vh; display: flex; flex-direction: column; color: var(--ink); background: #fff; }
+main { flex: 1; }
+main.container, .site-header .container, .site-footer .container { max-width: 1080px; }
+a { color: var(--accent); }
+h1, h2, h3 { letter-spacing: -.015em; }
+h1 { font-size: clamp(1.75rem, 3vw, 2.15rem); font-weight: 650; }
+
+.site-header { border-bottom: 1px solid var(--line); }
+.site-header a { text-decoration: none; }
+.brand { color: var(--ink); font-size: 1.05rem; font-weight: 650; white-space: nowrap; }
+.brand:hover, .site-header nav a:hover { color: var(--accent); }
+.site-header nav a { color: var(--muted); }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+
+.page-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.page-heading h1 { margin: 0; }
+.back-link { color: var(--muted); text-decoration: none; }
+.back-link:hover { color: var(--accent); }
+.search-bar { display: flex; gap: .65rem; max-width: 640px; }
+.search-bar input { min-width: 0; }
+.form-control, .btn { border-radius: 5px; }
+.form-control:focus { border-color: #89a9c2; box-shadow: 0 0 0 .15rem rgba(36, 93, 140, .1); }
+.btn-primary { --bs-btn-bg: #245d8c; --bs-btn-border-color: #245d8c; --bs-btn-hover-bg: #1c4d75; --bs-btn-hover-border-color: #1c4d75; }
+.btn-outline-primary { --bs-btn-color: #245d8c; --bs-btn-border-color: #9db4c8; --bs-btn-hover-bg: #245d8c; --bs-btn-hover-border-color: #245d8c; }
+
+.book-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.book-row { display: flex; flex-direction: column; gap: 1.25rem; min-height: 190px; padding: 1.25rem; border: 1px solid var(--line); border-radius: 10px; }
+.book-row-main { min-width: 0; }
+.book-row h2 { margin: 0 0 .2rem; font-size: 1.1rem; font-weight: 650; }
+.book-row h2 a { color: var(--ink); text-decoration: none; }
+.book-row h2 a:hover { color: var(--accent); text-decoration: underline; }
+.book-author { color: var(--muted); margin: 0; }
+.book-meta { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: auto; color: var(--muted); font-size: .875rem; }
+.empty-state { border-top: 1px solid var(--line); text-align: center; padding: 3rem 1rem; }
+.empty-state h2 { font-size: 1.2rem; }
+.empty-state p { color: var(--muted); }
+
+.panel { padding: 0; }
+.panel h2 { margin: 0; font-size: 1.2rem; font-weight: 650; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.chapter-count { color: var(--muted); font-size: .875rem; }
+.chapter-readonly { display: flex; gap: .8rem; border-top: 1px solid var(--line); padding: 1rem 0; }
+.chapter-readonly:last-child { padding-bottom: 0; }
+.chapter-number { flex: 0 0 2rem; color: var(--muted); font-size: .9rem; }
+.chapter-readonly h3 { font-size: 1rem; font-weight: 650; margin: 0 0 .5rem; }
+.chapter-body { color: #4b5560; overflow-wrap: anywhere; }
+.chapter-body > :last-child { margin-bottom: 0; }
+.book-facts { border-left: 1px solid var(--line); padding-left: 1.5rem; }
+.book-facts dl { margin: .5rem 0 1.5rem; }
+.book-facts dt { color: var(--muted); font-size: .8rem; font-weight: 500; margin-top: 1rem; }
+.book-facts dd { margin: .15rem 0 0; overflow-wrap: anywhere; }
+
+form .panel { border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; }
+.chapter-card { padding: 1.25rem 0; border-top: 1px solid var(--line); }
+.chapter-label { font-weight: 650; }
+.chapter-editor { min-height: 110px; background: #fff; }
+.chapter-card .ql-toolbar { border-radius: 4px 4px 0 0; border-color: #ced4da; }
+.chapter-card .ql-container { border-radius: 0 0 4px 4px; border-color: #ced4da; font-size: 1rem; }
+.chapter-card .ql-editor { min-height: 110px; }
+.import-box { padding-top: 1.25rem; border-top: 1px solid var(--line); }
+
+@media (max-width: 767px) {
+  .book-facts { border-left: 0; border-top: 1px solid var(--line); padding: 1.5rem 0 0; }
+}
+
+@media (max-width: 600px) {
+  .site-header .container { align-items: start !important; flex-direction: column; }
+  .site-header nav { flex-wrap: wrap; }
+  .search-bar { flex-wrap: wrap; }
+  .search-bar input { flex-basis: 100%; }
+  .book-row { min-height: 0; }
+}
