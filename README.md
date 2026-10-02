@@ -7,7 +7,7 @@
 Нужны .NET 10 SDK, SQL Server Express LocalDB и `sqlcmd`. Из корня проекта:
 
 ```powershell
-sqlcmd -S "(localdb)\MSSQLLocalDB" -E -b -I -f 65001 -i database\01-create-database.sql
+sqlcmd -S "(localdb)\MSSQLLocalDB" -E -b -I -f 65001 -i database\setup.sql
 if ($LASTEXITCODE -ne 0) { throw "Не удалось подготовить БД" }
 
 dotnet run --project src\LibraryCatalog.Web --launch-profile http
